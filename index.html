@@ -1,304 +1,209 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FIXIT AI – Dein persönlicher Techniker</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<title>FIXIT AI – Dein persönlicher Techniker</title>
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #0f1115;
-            color: #ffffff;
-            min-height: 100vh;
-        }
+<style>
 
-        .container {
-            max-width: 900px;
-            margin: auto;
-            padding: 30px 20px;
-        }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-        header {
-            text-align: center;
-            padding: 50px 20px 30px;
-        }
+body {
+    font-family: Arial, sans-serif;
+    background: #0f1115;
+    color: white;
+    min-height: 100vh;
+}
 
-        .logo {
-            font-size: 42px;
-            font-weight: 800;
-            letter-spacing: -2px;
-        }
+.container {
+    max-width: 850px;
+    margin: auto;
+    padding: 20px;
+}
 
-        .logo span {
-            color: #4ade80;
-        }
+header {
+    text-align: center;
+    padding: 55px 15px 35px;
+}
 
-        header p {
-            margin-top: 15px;
-            color: #a7adb8;
-            font-size: 18px;
-        }
+.logo {
+    font-size: 46px;
+    font-weight: 900;
+    letter-spacing: -2px;
+}
 
-        .card {
-            background: #191c23;
-            border-radius: 20px;
-            padding: 30px;
-            margin-top: 25px;
-            border: 1px solid #292e38;
-        }
+.logo span {
+    color: #4ade80;
+}
 
-        .card h2 {
-            margin-bottom: 20px;
-            font-size: 24px;
-        }
+.subtitle {
+    color: #a7adb8;
+    margin-top: 14px;
+    font-size: 18px;
+    line-height: 1.5;
+}
 
-        .devices {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-        }
+.card {
+    background: #191c23;
+    border: 1px solid #292e38;
+    border-radius: 22px;
+    padding: 30px;
+    margin-top: 20px;
+}
 
-        button {
-            border: none;
-            border-radius: 12px;
-            padding: 17px;
-            font-size: 16px;
-            cursor: pointer;
-            background: #242933;
-            color: white;
-            transition: 0.2s;
-        }
+h2 {
+    font-size: 25px;
+    margin-bottom: 22px;
+}
 
-        button:hover {
-            background: #303641;
-            transform: translateY(-2px);
-        }
+.device-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
 
-        .problem {
-            margin-top: 25px;
-            display: none;
-        }
+button {
+    border: none;
+    border-radius: 13px;
+    padding: 17px;
+    font-size: 16px;
+    cursor: pointer;
+    background: #252a33;
+    color: white;
+    transition: 0.2s;
+}
 
-        textarea {
-            width: 100%;
-            min-height: 130px;
-            padding: 15px;
-            border-radius: 12px;
-            border: 1px solid #343a46;
-            background: #101217;
-            color: white;
-            font-size: 16px;
-            resize: vertical;
-        }
+button:hover {
+    background: #343a46;
+    transform: translateY(-2px);
+}
 
-        .main-button {
-            width: 100%;
-            margin-top: 15px;
-            background: #4ade80;
-            color: #07130b;
-            font-weight: bold;
-        }
+.green-button {
+    background: #4ade80;
+    color: #07130b;
+    font-weight: bold;
+    width: 100%;
+    margin-top: 18px;
+}
 
-        .main-button:hover {
-            background: #65e891;
-        }
+.green-button:hover {
+    background: #65e891;
+}
 
-        .result {
-            display: none;
-            margin-top: 25px;
-            padding: 20px;
-            border-radius: 15px;
-            background: #101c15;
-            border: 1px solid #285c3b;
-        }
+.hidden {
+    display: none;
+}
 
-        .result h3 {
-            color: #4ade80;
-            margin-bottom: 10px;
-        }
+.progress {
+    color: #7f8794;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
 
-        .step {
-            margin-top: 15px;
-            padding: 15px;
-            background: #191c23;
-            border-radius: 10px;
-        }
+.question {
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 1.4;
+    margin-bottom: 25px;
+}
 
-        footer {
-            text-align: center;
-            color: #686f7c;
-            padding: 40px 20px;
-            font-size: 13px;
-        }
+.answers {
+    display: grid;
+    gap: 12px;
+}
 
-        @media (max-width: 600px) {
-            .logo {
-                font-size: 34px;
-            }
+.answer {
+    text-align: left;
+    background: #252a33;
+}
 
-            .devices {
-                grid-template-columns: 1fr;
-            }
+.answer:hover {
+    background: #343a46;
+}
 
-            .card {
-                padding: 20px;
-            }
-        }
-    </style>
+.success {
+    background: #102018;
+    border: 1px solid #2f7548;
+}
+
+.success h2 {
+    color: #4ade80;
+}
+
+.warning {
+    background: #201a10;
+    border: 1px solid #705323;
+}
+
+.small {
+    color: #a7adb8;
+    line-height: 1.6;
+    margin-top: 10px;
+}
+
+.restart {
+    margin-top: 20px;
+    width: 100%;
+}
+
+footer {
+    text-align: center;
+    color: #686f7c;
+    padding: 40px 20px;
+    font-size: 13px;
+}
+
+@media (max-width: 600px) {
+
+    .logo {
+        font-size: 37px;
+    }
+
+    .device-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        padding: 22px;
+    }
+
+}
+
+</style>
 </head>
 
 <body>
 
 <div class="container">
 
-    <header>
-        <div class="logo">FIXIT<span>AI</span></div>
-        <p>Dein persönlicher Techniker.</p>
-        <p>Beschreibe dein Problem – wir zeigen dir den nächsten Schritt.</p>
-    </header>
+<header>
 
-    <div class="card">
-
-        <h2>🔧 Was funktioniert nicht?</h2>
-
-        <div class="devices">
-
-            <button onclick="selectDevice('📺 Fernseher')">
-                📺 Fernseher
-            </button>
-
-            <button onclick="selectDevice('📡 WLAN / Router')">
-                📡 WLAN / Router
-            </button>
-
-            <button onclick="selectDevice('🎮 Xbox / PlayStation')">
-                🎮 Konsole
-            </button>
-
-            <button onclick="selectDevice('🖨️ Drucker')">
-                🖨️ Drucker
-            </button>
-
-            <button onclick="selectDevice('💻 Computer')">
-                💻 Computer
-            </button>
-
-            <button onclick="selectDevice('📱 Smartphone')">
-                📱 Smartphone
-            </button>
-
-            <button onclick="selectDevice('🎧 Kopfhörer')">
-                🎧 Kopfhörer
-            </button>
-
-            <button onclick="selectDevice('❓ Anderes Gerät')">
-                ❓ Anderes Gerät
-            </button>
-
-        </div>
-
-        <div class="problem" id="problemBox">
-
-            <h2 id="selectedDevice"></h2>
-
-            <p style="color:#a7adb8; margin-bottom:12px;">
-                Beschreibe kurz, was nicht funktioniert:
-            </p>
-
-            <textarea
-                id="problemText"
-                placeholder="Zum Beispiel: Mein Fernseher hat plötzlich keinen Ton mehr...">
-            </textarea>
-
-            <button class="main-button" onclick="analyzeProblem()">
-                🔍 Problem analysieren
-            </button>
-
-        </div>
-
-        <div class="result" id="result">
-
-            <h3>💡 Erste Einschätzung</h3>
-
-            <p id="resultText"></p>
-
-            <div class="step">
-                <strong>👉 Schritt 1</strong>
-                <p style="margin-top:8px;">
-                    Prüfe zunächst die Stromversorgung und ob das Gerät korrekt angeschlossen ist.
-                </p>
-            </div>
-
-            <div class="step">
-                <strong>👉 Schritt 2</strong>
-                <p style="margin-top:8px;">
-                    Wenn das Problem weiterhin besteht, beschreibe uns genau, was du auf dem Gerät siehst.
-                </p>
-            </div>
-
-        </div>
-
+    <div class="logo">
+        FIXIT<span>AI</span>
     </div>
 
-</div>
+    <div class="subtitle">
+        Dein persönlicher Techniker.
+        <br>
+        Wir finden heraus, was los ist – Schritt für Schritt.
+    </div>
 
-<footer>
-    FIXIT AI – Prototype 2026
-</footer>
+</header>
 
-<script>
 
-    let selectedDevice = "";
+<!-- START -->
 
-    function selectDevice(device) {
+<div class="card" id="start">
 
-        selectedDevice = device;
+    <h2>🔧 Was funktioniert nicht?</h2>
 
-        document.getElementById("selectedDevice").innerText =
-            device;
+    <div class="device-grid">
 
-        document.getElementById("problemBox").style.display =
-            "block";
-
-        document.getElementById("result").style.display =
-            "none";
-
-        document.getElementById("problemText").focus();
-    }
-
-    function analyzeProblem() {
-
-        const problem =
-            document.getElementById("problemText").value;
-
-        if (problem.trim() === "") {
-
-            alert("Beschreibe bitte zuerst dein Problem.");
-
-            return;
-        }
-
-        document.getElementById("resultText").innerText =
-            "Du hast ein Problem mit " +
-            selectedDevice +
-            " beschrieben. FIXIT AI würde jetzt anhand deines Problems die wahrscheinlichste Ursache bestimmen und dich Schritt für Schritt durch die Lösung führen.";
-
-        document.getElementById("result").style.display =
-            "block";
-
-        document.getElementById("result").scrollIntoView({
-            behavior: "smooth"
-        });
-    }
-
-</script>
-
-</body>
-</html>
+        <button onclick="startDiagnosis('WLAN / Internet')">
+            📡
