@@ -4,21 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>FIXIT AI – Dein persönlicher Techniker</title>
+<title>FIXIT AI</title>
 
 <style>
-
 * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
 }
 
 body {
+    margin: 0;
     font-family: Arial, sans-serif;
     background: #0f1115;
     color: white;
-    min-height: 100vh;
 }
 
 .container {
@@ -29,13 +26,12 @@ body {
 
 header {
     text-align: center;
-    padding: 55px 15px 35px;
+    padding: 50px 10px 30px;
 }
 
 .logo {
     font-size: 46px;
-    font-weight: 900;
-    letter-spacing: -2px;
+    font-weight: bold;
 }
 
 .logo span {
@@ -44,137 +40,95 @@ header {
 
 .subtitle {
     color: #a7adb8;
-    margin-top: 14px;
     font-size: 18px;
     line-height: 1.5;
+    margin-top: 15px;
 }
 
 .card {
     background: #191c23;
     border: 1px solid #292e38;
-    border-radius: 22px;
-    padding: 30px;
+    border-radius: 20px;
+    padding: 25px;
     margin-top: 20px;
 }
 
 h2 {
-    font-size: 25px;
-    margin-bottom: 22px;
+    margin-top: 0;
 }
 
-.device-grid {
+.grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
 }
 
 button {
-    border: none;
-    border-radius: 13px;
+    border: 0;
+    border-radius: 12px;
     padding: 17px;
     font-size: 16px;
-    cursor: pointer;
-    background: #252a33;
     color: white;
-    transition: 0.2s;
+    background: #252a33;
+    cursor: pointer;
 }
 
 button:hover {
     background: #343a46;
-    transform: translateY(-2px);
 }
 
-.green-button {
+.answer {
+    display: block;
+    width: 100%;
+    margin-top: 12px;
+    text-align: left;
+}
+
+.green {
     background: #4ade80;
     color: #07130b;
     font-weight: bold;
     width: 100%;
-    margin-top: 18px;
-}
-
-.green-button:hover {
-    background: #65e891;
+    margin-top: 15px;
 }
 
 .hidden {
     display: none;
 }
 
-.progress {
-    color: #7f8794;
-    font-size: 14px;
-    margin-bottom: 12px;
-}
-
 .question {
-    font-size: 22px;
+    font-size: 21px;
     font-weight: bold;
     line-height: 1.4;
-    margin-bottom: 25px;
 }
 
-.answers {
-    display: grid;
-    gap: 12px;
-}
-
-.answer {
-    text-align: left;
-    background: #252a33;
-}
-
-.answer:hover {
-    background: #343a46;
+.progress {
+    color: #858d9a;
+    margin-bottom: 15px;
 }
 
 .success {
-    background: #102018;
-    border: 1px solid #2f7548;
+    border-color: #4ade80;
 }
 
 .success h2 {
     color: #4ade80;
 }
 
-.warning {
-    background: #201a10;
-    border: 1px solid #705323;
-}
-
 .small {
     color: #a7adb8;
     line-height: 1.6;
-    margin-top: 10px;
 }
 
-.restart {
-    margin-top: 20px;
-    width: 100%;
-}
-
-footer {
-    text-align: center;
-    color: #686f7c;
-    padding: 40px 20px;
-    font-size: 13px;
-}
-
-@media (max-width: 600px) {
-
-    .logo {
-        font-size: 37px;
-    }
-
-    .device-grid {
+@media(max-width:600px) {
+    .grid {
         grid-template-columns: 1fr;
     }
 
-    .card {
-        padding: 22px;
+    .logo {
+        font-size: 38px;
     }
-
 }
-
 </style>
 </head>
 
@@ -183,17 +137,13 @@ footer {
 <div class="container">
 
 <header>
-
-    <div class="logo">
-        FIXIT<span>AI</span>
-    </div>
+    <div class="logo">FIXIT<span>AI</span></div>
 
     <div class="subtitle">
         Dein persönlicher Techniker.
         <br>
         Wir finden heraus, was los ist – Schritt für Schritt.
     </div>
-
 </header>
 
 
@@ -203,7 +153,388 @@ footer {
 
     <h2>🔧 Was funktioniert nicht?</h2>
 
-    <div class="device-grid">
+    <div class="grid">
 
-        <button onclick="startDiagnosis('WLAN / Internet')">
-            📡
+        <button onclick="startDiagnosis('WLAN')">
+            📡 WLAN / Internet
+        </button>
+
+        <button onclick="startDiagnosis('TV')">
+            📺 Fernseher
+        </button>
+
+        <button onclick="startDiagnosis('Konsole')">
+            🎮 Xbox / PlayStation
+        </button>
+
+        <button onclick="startDiagnosis('Drucker')">
+            🖨️ Drucker
+        </button>
+
+        <button onclick="startDiagnosis('Computer')">
+            💻 Computer
+        </button>
+
+        <button onclick="startDiagnosis('Smartphone')">
+            📱 Smartphone
+        </button>
+
+        <button onclick="startDiagnosis('Kopfhörer')">
+            🎧 Kopfhörer
+        </button>
+
+        <button onclick="startDiagnosis('Andere')">
+            ❓ Anderes Gerät
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- DIAGNOSE -->
+
+<div class="card hidden" id="diagnosis">
+
+    <div class="progress" id="progress"></div>
+
+    <div class="question" id="question"></div>
+
+    <div id="answers"></div>
+
+</div>
+
+
+<!-- ERFOLG -->
+
+<div class="card success hidden" id="success">
+
+    <h2>🎉 Problem gelöst!</h2>
+
+    <p class="small">
+        Perfekt! Genau so soll FIXIT AI funktionieren:
+        Schritt für Schritt zur Lösung, ohne dich mit
+        unnötigen Informationen zu überladen.
+    </p>
+
+    <button onclick="restart()">
+        🔄 Neues Problem
+    </button>
+
+</div>
+
+
+</div>
+
+
+<script>
+
+let device = "";
+let step = 0;
+
+
+/* START */
+
+function startDiagnosis(selectedDevice) {
+
+    device = selectedDevice;
+    step = 0;
+
+    document.getElementById("start")
+        .classList.add("hidden");
+
+    document.getElementById("diagnosis")
+        .classList.remove("hidden");
+
+    document.getElementById("success")
+        .classList.add("hidden");
+
+    showStep();
+}
+
+
+/* DIAGNOSE */
+
+function showStep() {
+
+    const question =
+        document.getElementById("question");
+
+    const answers =
+        document.getElementById("answers");
+
+    const progress =
+        document.getElementById("progress");
+
+
+    if (device === "WLAN") {
+
+        showWifiStep(
+            question,
+            answers,
+            progress
+        );
+
+        return;
+    }
+
+
+    progress.innerText =
+        "Erste Analyse";
+
+    question.innerText =
+        "Was genau funktioniert bei deinem " +
+        device +
+        " nicht?";
+
+    answers.innerHTML = `
+
+        <button class="answer"
+            onclick="genericAnswer()">
+            🔧 Ich beschreibe mein Problem
+        </button>
+
+        <button class="answer"
+            onclick="restart()">
+            🔄 Anderes Gerät auswählen
+        </button>
+
+    `;
+}
+
+
+/* WLAN */
+
+function showWifiStep(question, answers, progress) {
+
+    progress.innerText =
+        "Schritt " + (step + 1) + " von 4";
+
+
+    if (step === 0) {
+
+        question.innerText =
+            "Funktioniert das Internet auf anderen Geräten ebenfalls nicht?";
+
+        answers.innerHTML = `
+
+            <button class="answer"
+                onclick="wifiAnswer('all')">
+                🔴 Ja – mehrere Geräte haben kein Internet
+            </button>
+
+            <button class="answer"
+                onclick="wifiAnswer('one')">
+                🟢 Nein – nur dieses Gerät hat Probleme
+            </button>
+
+        `;
+
+    }
+
+
+    else if (step === 1) {
+
+        question.innerText =
+            "Siehst du an deinem Router eine rote oder ungewöhnlich blinkende Leuchte?";
+
+        answers.innerHTML = `
+
+            <button class="answer"
+                onclick="wifiAnswer('red')">
+                🔴 Ja
+            </button>
+
+            <button class="answer"
+                onclick="wifiAnswer('normal')">
+                🟢 Nein, alles sieht normal aus
+            </button>
+
+        `;
+
+    }
+
+
+    else if (step === 2) {
+
+        question.innerText =
+            "Öffne auf deinem Smartphone eine Webseite. Wird sie geladen?";
+
+        answers.innerHTML = `
+
+            <button class="answer"
+                onclick="wifiAnswer('yes')">
+                🟢 Ja
+            </button>
+
+            <button class="answer"
+                onclick="wifiAnswer('no')">
+                🔴 Nein
+            </button>
+
+        `;
+
+    }
+
+
+    else {
+
+        question.innerText =
+            "Starte jetzt deinen Router neu.";
+
+        answers.innerHTML = `
+
+            <p class="small">
+                Ziehe den Netzstecker des Routers.
+                Warte ungefähr 30 Sekunden und stecke
+                ihn anschließend wieder ein.
+            </p>
+
+            <button class="green"
+                onclick="wifiRestarted()">
+                🔄 Router wurde neu gestartet
+            </button>
+
+        `;
+    }
+}
+
+
+/* WLAN ANTWORT */
+
+function wifiAnswer(answer) {
+
+    if (answer === "one") {
+
+        questionMessage(
+            "Das Problem scheint nur dieses Gerät zu betreffen.",
+            "Als Nächstes würden wir genau dieses Gerät untersuchen."
+        );
+
+        return;
+    }
+
+
+    if (answer === "red") {
+
+        questionMessage(
+            "Eine ungewöhnliche Router-Anzeige wurde erkannt.",
+            "Im nächsten Schritt würden wir das genaue Routermodell und die Anzeige prüfen."
+        );
+
+        return;
+    }
+
+
+    if (answer === "yes") {
+
+        questionMessage(
+            "Deine Internetverbindung funktioniert grundsätzlich.",
+            "Das Problem könnte auf das betroffene Gerät beschränkt sein."
+        );
+
+        return;
+    }
+
+
+    if (answer === "all" ||
+        answer === "normal" ||
+        answer === "no") {
+
+        step++;
+
+        showStep();
+    }
+}
+
+
+/* NEUSTART */
+
+function wifiRestarted() {
+
+    document.getElementById("diagnosis")
+        .classList.add("hidden");
+
+    document.getElementById("success")
+        .classList.remove("hidden");
+}
+
+
+/* GENERISCHE GERÄTE */
+
+function genericAnswer() {
+
+    const question =
+        document.getElementById("question");
+
+    const answers =
+        document.getElementById("answers");
+
+    question.innerText =
+        "🤖 KI-Diagnose kommt als Nächstes";
+
+    answers.innerHTML = `
+
+        <p class="small">
+            In der nächsten Version analysiert FIXIT AI
+            dein konkretes Problem automatisch und erstellt
+            einen individuellen Lösungsweg.
+        </p>
+
+        <button class="green"
+            onclick="restart()">
+            🔄 Neues Problem
+        </button>
+
+    `;
+}
+
+
+/* ZWISCHENMELDUNG */
+
+function questionMessage(title, text) {
+
+    const question =
+        document.getElementById("question");
+
+    const answers =
+        document.getElementById("answers");
+
+    question.innerText = title;
+
+    answers.innerHTML = `
+
+        <p class="small">
+            ${text}
+        </p>
+
+        <button class="green"
+            onclick="restart()">
+            🔄 Neues Problem
+        </button>
+
+    `;
+}
+
+
+/* NEUSTART */
+
+function restart() {
+
+    device = "";
+    step = 0;
+
+    document.getElementById("start")
+        .classList.remove("hidden");
+
+    document.getElementById("diagnosis")
+        .classList.add("hidden");
+
+    document.getElementById("success")
+        .classList.add("hidden");
+}
+
+</script>
+
+</body>
+</html>
